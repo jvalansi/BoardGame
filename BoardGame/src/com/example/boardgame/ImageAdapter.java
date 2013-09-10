@@ -10,13 +10,20 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+	private Board mBoard;
 
     public ImageAdapter(Context c) {
         mContext = c;
     }
 
-    public int getCount() {
-        return mThumbIds.length;
+    public ImageAdapter(Context c, Board board) {
+    	mContext = c;
+    	mBoard = board;
+	}
+
+	public int getCount() {
+
+		return this.mBoard.size();
     }
 
     public Object getItem(int position) {
@@ -35,12 +42,12 @@ public class ImageAdapter extends BaseAdapter {
             imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
-            imageView.setBackgroundColor(Color.BLACK);
         } else {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        imageView.setBackgroundColor(Color.BLACK);
+        imageView.setImageResource(mThumbIds[mBoard.getTile(position)]);
         return imageView;
     }
 
